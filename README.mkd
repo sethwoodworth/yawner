@@ -1,0 +1,10 @@
+Yawner
+------
+
+What is Yawner?
+===============
+The code behind the Social Sleep Tracker: Yawnlog. Keep track of your sleeps, graph the results over time, learn new things about the way you sleep and share them with friends!
+
+How did you sleep? Did you dream? Dream about flying?
+Here at Yawnlog we care about your sleep.
+Come count our sheep.
