@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ user.username }} Dashboard {% endblock %}
+
+{% block main %}
+
+{% for sleep in sleeps %}
+    {{ sleep }}
+{% endfor %}

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>YawnLog.com{% block title %} &emdash; Social sleep tracking {% endblock %}</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png"/>
+    <%= stylesheet_link_tag *(['style'] + @stylesheets) %>
+    <%= javascript_include_tag *(['jquery'] + @javascripts) %>
+  </head>
+  <body>
+    <div id="page">
+      <div id="header">
+        <div class="headwrap">
+          <div id="nav">
+            <div id="logo"><a href="/"><img src="/images/yawnlog_logo_beta_horz3.png" alt="PJ's looking out for your sleep!"></a></div>
+            <ul>
+              {% if session[:user_id] %}
+                <li>
+                  <a href="/sleep">Sleep</a>
+                </li>
+                <li>
+                  <a href="/friends">Friends</a>
+                </li>
+                <li>
+                  <a href="/world">World</a>
+                </li>
+                <li>
+                  <a href="/settings">Settings</a>
+                </li>
+              <% if User.find(session[:user_id]).admin %>
+                <li><%= link_to "Admin", :controller => "admin", :action => "index" %></li>
+                <li><%= link_to "feedback", :controller => "admin", :action => "feedback" %></li>
+                <!-- <li><%= link_to "News", :controller => "home", :action => "news" %></li>-->
+              <% end %>
+              <% else %>
+                <li><%= link_to "Login", :controller => "users", :action => "login" %></li>
+                <li><%= link_to "Sign Up", :controller => "users", :action => "signup" %></li>
+              <% end %>
+                <li><%= link_to "About", :controller => "home", :action => "about" %></li>
+
+              </ul>
+          </div> <% #ends nav %>
+
+          <div id="login_box">
+            <% if session[:user_id] %>
+              <span style="background-color:#fff;">
+                Signed in as <%= session[:user_username] %>. 
+                <%= link_to "Sign Out", :controller => "users", :action => "logout" %>&nbsp;&nbsp;
+              </span>
+            <% end %>
+            <br />
+            <%= if pending 
+                link_to "Pending friend request", :controller => :friends, :action => :index
+                 end %>
+          </div>
+
+
+        <div id="feedback">
+          <%= link_to image_tag("blank.gif", :alt => "Feedback"), :controller => "home", :action => "feedback"%>
+          <%= image_tag "feedback2.png", :alt => "Feedback", :style => "display:none;" %>
+        </div>
+        </div> <% # ends the headwrap for non iphone %>
+      
+      </div> <% # header div end %>
+
+    <div id="main">
+        <% if flash[:notice] %><p class="flash notice"><%= flash[:notice] %></p><% end %>
+        <%= yield %>
+        {% block main %}
+        {% endblock %}
+    </div>
+
+    <div class="footwrap">
+        <div id="footer">
+            &copy; 2010 <a href="http://www.hellosilo.com">hellosilo llc.</a> | 
+            <%= link_to "Terms of Service", :controller => "home", :action => "tos"%> |
+            <%= link_to "Privacy Policy", :controller => "home", :action => "privacy_policy"%> |
+            <a href="http://github.com/sethwoodworth/Yawnlog-django">GPL code</a>
+        </div>
+    </div>
+
+  </div>
+
+
+        <script type="text/javascript">
+        // google analytics
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www."); document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E")); </script> <script type="text/javascript"> try { var pageTracker = _gat._getTracker("UA-7592525-4"); pageTracker._trackPageview(); } catch(err) {}
+        </script>
+    </body>
+</html>
