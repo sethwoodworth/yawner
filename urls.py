@@ -6,8 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'yawner.main.views.home', name='home'),
-    url(r'^/', include('yawner.main.urls')),
+    #url(r'^$', 'yawner.main.views.home', name='home'),
+    url(r'^', include('yawner.main.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
